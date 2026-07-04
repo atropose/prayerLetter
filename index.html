@@ -13,8 +13,10 @@
   2) og:image 는 그 달의 대표 사진 1장 경로로 바꾸세요. (카톡 미리보기 썸네일)
   3) 본문은 <!-- ===== 여기부터 매달 내용 ===== --> 아래부터
      <!-- ===== 여기까지 ===== --> 사이만 수정하면 됩니다.
-  4) 사진은 .photo 안의 background-image url(...) 부분을 실제 사진 경로로 바꾸세요.
+  4) 사진은 <img src="..."> 의 경로를 실제 사진 경로로 바꾸세요.
      예: images/2026-05/toilet-before.jpg
+     사진을 늘리고 싶으면 <figure class="slide"> 블록을 통째로 복사해서
+     같은 소식 슬라이더 안에 이어 붙이면 됩니다.
   ============================================================
 -->
 
@@ -203,36 +205,123 @@
     margin:0 0 16px;
   }
 
-  /* 사진: 폴라로이드 스타일 */
-  .photos{
+  /* 사진: 큰 슬라이드 형식 */
+  .photo-slider{
+    position:relative;
+    margin-top:14px;
+  }
+  .slider-viewport{
     display:flex;
-    flex-wrap:wrap;
-    gap:16px;
-    margin-top:6px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    gap:0;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    border-radius:2px;
   }
-  .polaroid{
+  .slider-viewport::-webkit-scrollbar{ display:none; }
+  .slide{
+    flex:0 0 100%;
+    scroll-snap-align:center;
     background:#fff;
-    padding:8px 8px 14px;
-    box-shadow:0 4px 10px #00000022;
-    width:150px;
+    padding:14px 14px 20px;
+    box-shadow:0 6px 18px #00000022;
   }
-  .polaroid:nth-child(1){ transform:rotate(-2.5deg); }
-  .polaroid:nth-child(2){ transform:rotate(2deg); }
-  .polaroid:nth-child(3){ transform:rotate(-1.5deg); }
-  .photo{
+  .slide img{
+    display:block;
     width:100%;
     aspect-ratio:4/3;
+    object-fit:cover;
+    cursor:zoom-in;
     background:linear-gradient(135deg,#E4E8DE,#D3D8C9);
-    background-size:cover;
-    background-position:center;
   }
-  .polaroid figcaption{
+  .slide figcaption{
     font-family:var(--mono);
-    font-size:10px;
+    font-size:11.5px;
     color:var(--muted);
     text-align:center;
-    margin-top:8px;
+    margin-top:10px;
     letter-spacing:0.3px;
+  }
+  .slider-btn{
+    position:absolute;
+    top:calc(50% - 20px);
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    border:1px solid var(--stripe-blue);
+    background:rgba(255,255,255,0.9);
+    color:var(--stripe-blue);
+    font-size:16px;
+    line-height:1;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .slider-btn.prev{ left:-4px; }
+  .slider-btn.next{ right:-4px; }
+  .slider-btn[hidden]{ display:none; }
+  .slider-dots{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    margin-top:10px;
+  }
+  .slider-dots span{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#C9CDC0;
+  }
+  .slider-dots span.active{
+    background:var(--stripe-red);
+  }
+
+  /* 라이트박스 (클릭 시 확대 팝업) */
+  .lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(12,16,22,0.94);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:28px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s ease;
+    z-index:1000;
+  }
+  .lightbox.open{
+    opacity:1;
+    pointer-events:auto;
+  }
+  .lightbox img{
+    max-width:92vw;
+    max-height:78vh;
+    object-fit:contain;
+    box-shadow:0 10px 40px #00000055;
+  }
+  .lightbox figcaption{
+    font-family:var(--mono);
+    font-size:12px;
+    color:#E6E9E0;
+    margin-top:16px;
+    letter-spacing:0.3px;
+  }
+  .lightbox-close{
+    position:absolute;
+    top:20px;
+    right:24px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid #E6E9E0;
+    background:transparent;
+    color:#E6E9E0;
+    font-size:20px;
+    cursor:pointer;
   }
 
   /* 기도제목 */
@@ -297,7 +386,7 @@
     .page{ padding:26px 18px 34px; }
     h1{ font-size:26px; }
     .postmark{ width:68px; height:68px; }
-    .polaroid{ width:44%; }
+    .slider-btn{ width:32px; height:32px; font-size:14px; }
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -340,19 +429,24 @@
       남녀 화장실을 분리하여 어린 학생들과 여성 성도들이 더 안전하고 편리하게
       사용할 수 있게 되었습니다.
     </p>
-    <div class="photos">
-      <figure class="polaroid">
-        <div class="photo" style="background-image:url('1396860510412.jpg')"></div>
-        <figcaption>리모델링 전</figcaption>
-      </figure>
-      <figure class="polaroid">
-        <div class="photo" style="background-image:url('1395893338395.jpg')"></div>
-        <figcaption>철거 및 시공</figcaption>
-      </figure>
-      <figure class="polaroid">
-        <div class="photo" style="background-image:url('20260517_184444.jpg')"></div>
-        <figcaption>리모델링 후</figcaption>
-      </figure>
+    <div class="photo-slider" data-slider>
+      <div class="slider-viewport">
+        <figure class="slide">
+          <img src="17499.jpg" alt="리모델링 전" data-caption="리모델링 전">
+          <figcaption>리모델링 전</figcaption>
+        </figure>
+        <figure class="slide">
+          <img src="1396860510412.jpg" alt="철거 및 시공" data-caption="철거 및 시공">
+          <figcaption>철거 및 시공</figcaption>
+        </figure>
+        <figure class="slide">
+          <img src="1395893338395.jpg" alt="리모델링 후" data-caption="리모델링 후">
+          <figcaption>리모델링 후</figcaption>
+        </figure>
+      </div>
+      <button class="slider-btn prev" aria-label="이전 사진" type="button">‹</button>
+      <button class="slider-btn next" aria-label="다음 사진" type="button">›</button>
+      <div class="slider-dots"></div>
     </div>
   </section>
 
@@ -364,15 +458,20 @@
       어머니들을 다시 한번 돌아보며, 교회 공동체가 서로를 위로하는 귀한 시간이
       되었습니다.
     </p>
-    <div class="photos">
-      <figure class="polaroid">
-        <div class="photo" style="background-image:url('17499.jpg')"></div>
-        <figcaption>어머니 주일</figcaption>
-      </figure>
-      <figure class="polaroid">
-        <div class="photo" style="background-image:url('17727.jpg')"></div>
-        <figcaption>어머니 주일</figcaption>
-      </figure>
+    <div class="photo-slider" data-slider>
+      <div class="slider-viewport">
+        <figure class="slide">
+          <img src="17727.jpg" alt="어머니 주일" data-caption="어머니 주일">
+          <figcaption>어머니 주일</figcaption>
+        </figure>
+        <figure class="slide">
+          <img src="20260517_184444.jpg" alt="어머니 주일" data-caption="어머니 주일">
+          <figcaption>어머니 주일</figcaption>
+        </figure>
+      </div>
+      <button class="slider-btn prev" aria-label="이전 사진" type="button" hidden></button>
+      <button class="slider-btn next" aria-label="다음 사진" type="button" hidden></button>
+      <div class="slider-dots"></div>
     </div>
   </section>
 
@@ -412,6 +511,12 @@
 
 <div class="airmail-border"></div>
 
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="닫기" type="button">×</button>
+  <img id="lightboxImg" src="" alt="">
+  <figcaption id="lightboxCaption"></figcaption>
+</div>
+
 <script>
   var entries = document.querySelectorAll('.entry');
   if ('IntersectionObserver' in window) {
@@ -427,6 +532,76 @@
   } else {
     entries.forEach(function(el){ el.classList.add('visible'); });
   }
+
+  // ── 사진 슬라이더: 넘기기 버튼 + 점 표시 ──
+  document.querySelectorAll('[data-slider]').forEach(function(slider){
+    var viewport = slider.querySelector('.slider-viewport');
+    var slides = viewport.querySelectorAll('.slide');
+    var prevBtn = slider.querySelector('.slider-btn.prev');
+    var nextBtn = slider.querySelector('.slider-btn.next');
+    var dotsWrap = slider.querySelector('.slider-dots');
+
+    if (slides.length <= 1) {
+      if (prevBtn) prevBtn.hidden = true;
+      if (nextBtn) nextBtn.hidden = true;
+      return;
+    }
+
+    slides.forEach(function(_, i){
+      var dot = document.createElement('span');
+      if (i === 0) dot.classList.add('active');
+      dotsWrap.appendChild(dot);
+    });
+    var dots = dotsWrap.querySelectorAll('span');
+
+    function updateDots(){
+      var index = Math.round(viewport.scrollLeft / viewport.clientWidth);
+      dots.forEach(function(d, i){ d.classList.toggle('active', i === index); });
+    }
+
+    prevBtn.addEventListener('click', function(){
+      viewport.scrollBy({ left: -viewport.clientWidth, behavior: 'smooth' });
+    });
+    nextBtn.addEventListener('click', function(){
+      viewport.scrollBy({ left: viewport.clientWidth, behavior: 'smooth' });
+    });
+    viewport.addEventListener('scroll', function(){
+      window.clearTimeout(viewport._t);
+      viewport._t = window.setTimeout(updateDots, 80);
+    });
+  });
+
+  // ── 라이트박스: 사진 클릭 시 크게 보기 ──
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightboxImg');
+  var lightboxCaption = document.getElementById('lightboxCaption');
+  var lightboxClose = document.getElementById('lightboxClose');
+
+  function openLightbox(src, caption){
+    lightboxImg.src = src;
+    lightboxImg.alt = caption || '';
+    lightboxCaption.textContent = caption || '';
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImg.src = '';
+  }
+
+  document.querySelectorAll('.slide img').forEach(function(img){
+    img.addEventListener('click', function(){
+      openLightbox(img.src, img.dataset.caption || img.alt);
+    });
+  });
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(e){
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeLightbox();
+  });
 </script>
 
 </body>

@@ -7,22 +7,12 @@
 
 <!--
   ============================================================
-  매달 수정하는 방법
-  1) <title> 과 아래 og:title / og:description 을 그 달 내용으로 바꾸세요.
-     (카카오톡에 링크를 붙여넣으면 이 og 태그로 미리보기 카드가 만들어집니다)
-  2) og:image 는 그 달의 대표 사진 1장 경로로 바꾸세요. (카톡 미리보기 썸네일)
-  3) 본문은 <!-- ===== 여기부터 매달 내용 ===== --> 아래부터
-     <!-- ===== 여기까지 ===== --> 사이만 수정하면 됩니다.
-  4) 사진은 <img src="..."> 의 경로를 실제 사진 경로로 바꾸세요.
-     예: images/2026-05/toilet-before.jpg
-     사진을 늘리고 싶으면 <figure class="slide"> 블록을 통째로 복사해서
-     같은 소식 슬라이더 안에 이어 붙이면 됩니다.
   ============================================================
 -->
 
 <meta property="og:title" content="아름다운 땅에서 — 2026년 5월 기도편지">
 <meta property="og:description" content="스리랑카 정승훈·이주연 선교사의 2026년 5월 기도편지입니다.">
-<meta property="og:image" content="Screenshot_20260704_152649_KakaoTalk.jpg">
+<meta property="og:image" content="image/2026-05/Screenshot_20260704_152649_KakaoTalk.jpg">
 <meta property="og:type" content="article">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -67,11 +57,11 @@
   }
 
   .page{
-    max-width:640px;
+    max-width:600px;
     margin:0 auto;
     background:var(--paper);
     box-shadow:0 8px 30px var(--paper-shadow);
-    padding:36px 30px 44px;
+    padding:18px 4px 30px;
     position:relative;
   }
 
@@ -80,7 +70,7 @@
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
-    margin-bottom:28px;
+    margin-bottom:22px;
   }
 
   .airmail-badge{
@@ -95,8 +85,8 @@
   }
 
   .postmark{
-    width:84px;
-    height:84px;
+    width:66px;
+    height:66px;
     border-radius:50%;
     border:2px solid var(--stamp);
     outline:1px solid var(--stamp);
@@ -113,43 +103,43 @@
   }
   .postmark .country{
     font-family:var(--mono);
-    font-size:9px;
-    letter-spacing:1px;
+    font-size:8px;
+    letter-spacing:0.5px;
     font-weight:500;
   }
   .postmark .date{
     font-family:var(--mono);
-    font-size:11px;
+    font-size:10px;
     font-weight:500;
     margin-top:2px;
   }
   .postmark .kind{
     font-family:var(--mono);
-    font-size:8px;
-    letter-spacing:1px;
+    font-size:7px;
+    letter-spacing:0.5px;
     margin-top:2px;
   }
 
   /* 제목 영역 */
   .title-block{
-    margin-bottom:26px;
+    margin-bottom:22px;
   }
   .eyebrow{
     font-family:var(--mono);
-    font-size:11px;
+    font-size:10px;
     color:var(--muted);
     letter-spacing:0.5px;
-    margin-bottom:8px;
+    margin-bottom:7px;
   }
   h1{
     font-family:var(--serif);
     font-weight:800;
-    font-size:32px;
-    line-height:1.25;
-    margin:0 0 12px;
+    font-size:25px;
+    line-height:1.3;
+    margin:0 0 10px;
   }
   .sender{
-    font-size:13px;
+    font-size:12px;
     color:var(--muted);
     display:flex;
     align-items:center;
@@ -165,18 +155,18 @@
   .greeting{
     font-family:var(--serif);
     font-style:italic;
-    font-size:15px;
-    line-height:1.85;
+    font-size:13.5px;
+    line-height:1.8;
     color:var(--ink);
     border-left:2px solid var(--stripe-blue);
-    padding-left:18px;
-    margin:0 0 36px;
+    padding-left:13px;
+    margin:0 0 28px;
   }
 
   /* 소식 섹션 */
   .entry{
-    margin-bottom:34px;
-    padding-bottom:30px;
+    margin-bottom:28px;
+    padding-bottom:24px;
     border-bottom:1px dashed #C9CDC0;
     opacity:0;
     transform:translateY(10px);
@@ -192,17 +182,17 @@
   .entry h2{
     font-family:var(--serif);
     font-weight:700;
-    font-size:18px;
-    margin:0 0 10px;
-    padding-left:12px;
+    font-size:16.5px;
+    margin:0 0 8px;
+    padding-left:10px;
     border-left:3px solid var(--stripe-red);
     line-height:1.4;
   }
   .entry p{
-    font-size:14px;
-    line-height:1.85;
+    font-size:13.5px;
+    line-height:1.8;
     color:#3C4550;
-    margin:0 0 16px;
+    margin:0 0 14px;
   }
 
   /* 사진: 큰 슬라이드 형식 */
@@ -224,7 +214,7 @@
     flex:0 0 100%;
     scroll-snap-align:center;
     background:#fff;
-    padding:14px 14px 20px;
+    padding:8px 8px 14px;
     box-shadow:0 6px 18px #00000022;
   }
   .slide img{
@@ -237,30 +227,30 @@
   }
   .slide figcaption{
     font-family:var(--mono);
-    font-size:11.5px;
+    font-size:10.5px;
     color:var(--muted);
     text-align:center;
-    margin-top:10px;
+    margin-top:8px;
     letter-spacing:0.3px;
   }
   .slider-btn{
     position:absolute;
-    top:calc(50% - 20px);
-    width:36px;
-    height:36px;
+    top:calc(50% - 16px);
+    width:32px;
+    height:32px;
     border-radius:50%;
     border:1px solid var(--stripe-blue);
     background:rgba(255,255,255,0.9);
     color:var(--stripe-blue);
-    font-size:16px;
+    font-size:14px;
     line-height:1;
     cursor:pointer;
     display:flex;
     align-items:center;
     justify-content:center;
   }
-  .slider-btn.prev{ left:-4px; }
-  .slider-btn.next{ right:-4px; }
+  .slider-btn.prev{ left:4px; }
+  .slider-btn.next{ right:4px; }
   .slider-btn[hidden]{ display:none; }
   .slider-dots{
     display:flex;
@@ -328,16 +318,16 @@
   .prayer-box{
     background:#fff;
     border:1px dashed var(--stripe-blue);
-    padding:20px 22px;
-    margin:6px 0 36px;
+    padding:15px 14px;
+    margin:4px 0 28px;
   }
   .prayer-box h3{
     font-family:var(--mono);
-    font-size:12px;
+    font-size:11px;
     letter-spacing:1px;
     text-transform:uppercase;
     color:var(--stripe-blue);
-    margin:0 0 14px;
+    margin:0 0 12px;
   }
   .prayer-box ul{
     list-style:none;
@@ -345,10 +335,10 @@
     padding:0;
   }
   .prayer-box li{
-    font-size:13.5px;
-    line-height:1.9;
+    font-size:13px;
+    line-height:1.8;
     color:var(--ink);
-    padding-left:24px;
+    padding-left:21px;
     position:relative;
     margin-bottom:6px;
   }
@@ -356,9 +346,9 @@
     content:'';
     position:absolute;
     left:0;
-    top:5px;
-    width:12px;
-    height:12px;
+    top:4px;
+    width:11px;
+    height:11px;
     border:1.5px solid var(--stripe-red);
   }
 
@@ -370,23 +360,43 @@
   .signature .from{
     font-family:var(--serif);
     font-style:italic;
-    font-size:13px;
+    font-size:12px;
     color:var(--muted);
     margin-bottom:4px;
   }
   .signature .name{
     font-family:var(--script);
-    font-size:30px;
+    font-size:25px;
     color:var(--ink);
     transform:rotate(-1.5deg);
     display:inline-block;
   }
 
-  @media (max-width:480px){
-    .page{ padding:26px 18px 34px; }
-    h1{ font-size:26px; }
-    .postmark{ width:68px; height:68px; }
-    .slider-btn{ width:32px; height:32px; font-size:14px; }
+  @media (min-width:600px){
+    .page{ padding:40px 34px 48px; }
+    .letterhead{ margin-bottom:28px; }
+    .airmail-badge{ font-size:10px; padding:5px 9px; letter-spacing:1.5px; }
+    .postmark{ width:84px; height:84px; }
+    .postmark .country{ font-size:9px; letter-spacing:1px; }
+    .postmark .date{ font-size:11px; }
+    .postmark .kind{ font-size:8px; letter-spacing:1px; }
+    .title-block{ margin-bottom:26px; }
+    .eyebrow{ font-size:11px; margin-bottom:8px; }
+    h1{ font-size:32px; line-height:1.25; margin-bottom:12px; }
+    .sender{ font-size:13px; }
+    .greeting{ font-size:15px; line-height:1.85; padding-left:18px; margin-bottom:36px; }
+    .entry{ margin-bottom:34px; padding-bottom:30px; }
+    .entry h2{ font-size:18px; padding-left:12px; margin-bottom:10px; }
+    .entry p{ font-size:14px; line-height:1.85; margin-bottom:16px; }
+    .slide{ padding:14px 14px 20px; }
+    .slide figcaption{ font-size:11.5px; margin-top:10px; }
+    .slider-btn{ width:36px; height:36px; font-size:16px; top:calc(50% - 20px); }
+    .prayer-box{ padding:20px 22px; margin:6px 0 36px; }
+    .prayer-box h3{ font-size:12px; margin-bottom:14px; }
+    .prayer-box li{ font-size:13.5px; padding-left:24px; }
+    .prayer-box li::before{ width:12px; height:12px; top:5px; }
+    .signature .from{ font-size:13px; }
+    .signature .name{ font-size:30px; }
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -432,15 +442,15 @@
     <div class="photo-slider" data-slider>
       <div class="slider-viewport">
         <figure class="slide">
-          <img src="17499.jpg" alt="리모델링 전" data-caption="리모델링 전">
+          <img src="image/2026-05/17499.jpg" alt="리모델링 전" data-caption="리모델링 전">
           <figcaption>리모델링 전</figcaption>
         </figure>
         <figure class="slide">
-          <img src="1396860510412.jpg" alt="철거 및 시공" data-caption="철거 및 시공">
+          <img src="image/2026-05/1395893338395.jpg" alt="철거 및 시공" data-caption="철거 및 시공">
           <figcaption>철거 및 시공</figcaption>
         </figure>
         <figure class="slide">
-          <img src="1395893338395.jpg" alt="리모델링 후" data-caption="리모델링 후">
+          <img src="image/2026-05/1396860510412.jpg" alt="리모델링 후" data-caption="리모델링 후">
           <figcaption>리모델링 후</figcaption>
         </figure>
       </div>
@@ -461,11 +471,11 @@
     <div class="photo-slider" data-slider>
       <div class="slider-viewport">
         <figure class="slide">
-          <img src="17727.jpg" alt="어머니 주일" data-caption="어머니 주일">
+          <img src="image/2026-05/20260517_184444.jpg" alt="어머니 주일" data-caption="어머니 주일">
           <figcaption>어머니 주일</figcaption>
         </figure>
         <figure class="slide">
-          <img src="20260517_184444.jpg" alt="어머니 주일" data-caption="어머니 주일">
+          <img src="image/2026-05/17727.jpg" alt="어머니 주일" data-caption="어머니 주일">
           <figcaption>어머니 주일</figcaption>
         </figure>
       </div>
@@ -482,6 +492,10 @@
       생애를 다룬 영상을 시청하고 기도회를 가졌습니다. 학생들은 예수님을
       인격적으로 만나고 싶다는 고백을 나누었습니다.
     </p>
+    <video controls playsinline style="display:block; width:100%; background:#000;">
+      <source src="video/2026-05/[SHANA]20200326_105019.mp4">
+      브라우저가 이 영상 형식을 지원하지 않습니다.
+    </video>
   </section>
 
   <div class="prayer-box">
